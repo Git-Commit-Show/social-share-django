@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Social Sharing App</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<div>
+		<div style="line-height: 20px;"> 
+			<form method="GET" action=" {% url 'sharePage' %}">
+				<div>
+					<label  style="height: 50px; width:200px"for="Text">Text</label>
+		        	<input style="height: 50px; width:200px"  type="text" name="Text" placeholder="Text to post" >
+		        </div>
+		        <div>
+                	<label style="height: 50px; width:200px" for="hashTags">Hash Tags</label>
+					<input  style="height: 50px; width:200px;" type="text" name="hashTags" placeholder=" Comma Seperated hashtags">
+				</div>
+				<div>
+					<label style="height: 50px; width:200px" for="URL"> URL</label>
+					<input style="height: 50px; width:200px"  type="text" name="URL" placeholder="URL">
+				</div>
+				<button  type="submit">Export</button>
+			</form>
+            <div class="container">
+				<a class="twitter-share-button" target="_blank" 
+			  	href="https://twitter.com/intent/tweet?text={{ text }}&hashtags={{ hashtag }}">
+				<i style="font-size:34px;border:10px; position:absolute;left: 100px;" class="fa">&#xf099;</i></a>
+				<a href="https://www.facebook.com/share.php?u={{ url }}&t=This is the title" target="_blank"> <i style="font-size:34px;border:10px; position:absolute;left: 150px;" class="fa">&#xf09a;</i></a>
+				<a href="https://www.linkedin.com/sharing/share-offsite/?url={{ url }} "target="_blank" ><i style="font-size:34px;border:10px; position:absolute;left: 200px;" class="fa">&#xf0e1;</i></a>
+			</div>
+	</div>
+</body>
+</html>
