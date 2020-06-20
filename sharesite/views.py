@@ -5,7 +5,7 @@ import requests
 # Create your views here.
 def sharePage(request):
     if request.method == "GET":
-        print(' An filled Form*****************************************')
+        print(' An filled Form '+' *'*10)
         form = PostForm(request.GET)
         data = request.GET.copy()
         print(data.get('hashTags'))
