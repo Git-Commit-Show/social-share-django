@@ -29,7 +29,10 @@ def upload(request):
 			logo=imdt[1]
 			print(os.getcwd())
 			try:
+
 				os.chdir('media/images')
+				if(request.POST['path']):
+					image.watermark_a_folder(request.POST['path'])
 				image.watermark(INPUT,OUTPUT,logo,request.POST['position'],request.POST['text'])
 				print('It worked')
 			except Exception as e:
