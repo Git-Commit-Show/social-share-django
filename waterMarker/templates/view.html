@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Output Images</title>
+	<style type="text/css">
+	html, body {
+    max-width: 100%;
+    overflow: auto;
+   }
+
+	</style>
+</head>
+<body>
+{% for i in list %}
+  <div >
+  <div> 
+  	    <h1>{{i}}</h1>
+   		<img src="{% static i %}" width="100%">
+  </div> 
+  <br>
+  <br>
+  </div>
+
+{% endfor %}
+
+</body>
+</html>
