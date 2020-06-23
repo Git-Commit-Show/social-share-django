@@ -2,13 +2,12 @@ from django.shortcuts import render
 import requests
 from PIL import Image
 from .forms import ImageForm
-from media.images import main
+from media.images import image
 import os
 
-INPUT = "oppojuhiji0[9h08h.jpg"
-OUTPUT='watermarkAdded.jpg'
-logo='download.jpg'
-position='tl'
+INPUT = "Common_Event_Poster_Verticle_Withlogo.png"
+OUTPUT = "output/result.png"
+POSITION='bcl'
 DISPLAY = False
 TEXT = ""                               # Let it be empty unless you want text and watermark both
 FONT = "fonts/Helvetica.ttf"
@@ -28,9 +27,10 @@ def upload(request):
 			logoPath=initial_obj.logo.name
 			imdt=logoPath.split('/')
 			logo=imdt[1]
+			print(os.getcwd())
 			try:
-				os.chdir('C:/Users/pc/Desktop/Social- share/socialShare/media/images')
-				main.watermark(logo,request.POST['position'],request.POST['text'])
+				os.chdir('media/images')
+				image.watermark(INPUT,OUTPUT,logo,request.POST['position'],request.POST['text'])
 				print('It worked')
 			except Exception as e:
 				print(e)
