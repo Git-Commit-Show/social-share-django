@@ -7,7 +7,7 @@ from .models import Images
 class ImageForm(forms.ModelForm):
     class Meta:
         model= Images
-        fields= ["text", "position","logo"]
+        fields= ["text", "position","logo","path"]
 # try:
 # 				os.chdir('C:/Users/pc/Desktop/Social- share/socialShare/media/images')
 # 				print(os.getcwd())

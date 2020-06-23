@@ -1,61 +1,11 @@
 from PIL import Image, ImageDraw, ImageFont
-from docopt import docopt
 import os
-import sys
-
-usage = '''
-
-Image Manipulation
-Usage:  main.py (-l <input_file> -p <position>) (-o <output_file>) [(-t <text>)]
-        main.py (-i <input_file> -T <text>) (-o <output_file>)
-        main.py (--logo <input_file> --position <position>) --output <output_file>
-        main.py (-h | --help)
-
-
-Examples:
-
-    Add a logo of sponsor on the input image
-
-    main.py -l logos/sponsor.png -p bcl -o parth
-    main.py --logo logos/sponsor.png --position bcl --output parth
-
-    Add logo with text
-
-    main.py -l logos/sponsor.png -p bcl -o parth -t GCS2020
-
-Positions - Watermark:
-        tl      Top Left Corner
-        b       Below Watermark Image
-        tc      Top Center
-        r       On Right Of Watermark Image
-        tr      Top Right
-        cl      Center Left
-        c       Center 
-        cr      Center Right
-        bl      Bottom Left
-        bc      Bottom Center
-        br      Bottom Right 
-        bcl     Bottom Center Left
-
-Positions - Watermark With Text:
-        tl      Top Left Corner
-        tc      Top Center
-        tr      Top Right
-        cl      Center Left
-        c       Center 
-        cr      Center Right
-        bl      Bottom Left
-        bc      Bottom Center
-        br      Bottom Right 
-
-'''
 
 # DEAFULTS
 
-INPUT = "picture.jpg"
-OUTPUT='result.jpg'
-LOGO='download.jpg'
-POSITION='tl'
+INPUT = "Common_Event_Poster_Verticle_Withlogo.png"
+OUTPUT = "output/result.png"
+POSITION='bcl'
 DISPLAY = False
 TEXT = ""                               # Let it be empty unless you want text and watermark both
 FONT = "fonts/Helvetica.ttf"
@@ -65,11 +15,12 @@ TEXT_POSITION = "bc"
 TEXT_ALIGN_WATERMARK = "r"              # Text Position wrt Watermark
 
 
-def watermark(watermark_image_path,
+def watermark(
+              input_image_path,
+              output_image_path,
+              watermark_image_path,
               position_logo,
               text=TEXT,
-              input_image_path=INPUT,
-              output_image_path=OUTPUT,
               color=COLOR,
               text_size=TEXT_SIZE,
               text_position=TEXT_ALIGN_WATERMARK
@@ -129,7 +80,7 @@ def watermark_with_text(input_image_path,
     base_image = Image.open(input_image_path) 
     width_base, height_base = base_image.size 
 
-    drawing = ImageDraw.Draw(base_image) 
+    drawing = ImageDraw.Draw(base_image)
     bias_width=int(width_base*.05)
     bias_height=int(height_base*.05)
     if bias_height>50:
@@ -155,3 +106,11 @@ def watermark_with_text(input_image_path,
         base_image.show()
     base_image.save(output_image_path)
 
+def watermark_a_folder(folder_path):
+    global OUTPUT
+    logo_list=os.listdir(folder_path)
+    for i in logo_list:
+        OUTPUT=OUTPUT+'result'+'_'+i
+        watermark(INPUT,OUTPUT,folder_path+i,POSITION)
+        OUTPUT = "output/"
+    
