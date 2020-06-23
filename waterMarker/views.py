@@ -43,6 +43,7 @@ def upload(request):
 
 
 def viewAll(request):
+    os.path.join(os.getcwd(), "media/images/output")
     list=os.listdir('media/images/output')
     return render(request,'view.html',{'list':list})
 
