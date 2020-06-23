@@ -29,16 +29,20 @@ def upload(request):
 			logo=imdt[1]
 			print(os.getcwd())
 			try:
-
-				os.chdir('media/images')
-				if(request.POST['path']):
-					image.watermark_a_folder(request.POST['path'])
-				image.watermark(INPUT,OUTPUT,logo,request.POST['position'],request.POST['text'])
-				print('It worked')
+			    print(os.getcwd())
+			    os.chdir('media/images')
+			    if(request.POST['path']):
+			    	image.watermark_a_folder(request.POST['path'])
+			    image.watermark(INPUT,OUTPUT,logo,request.POST['position'],request.POST['text'])
+			    print('It worked')
 			except Exception as e:
 				print(e)
 				print("Not working")
 	context= {'form': form}
 	return render(request,'upload.html',context)
 
+
+def viewAll(request):
+	list=os.listdir('media/images/output')
+	return render(request,'view.html',{'list':list})
 
