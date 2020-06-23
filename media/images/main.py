@@ -53,9 +53,9 @@ Positions - Watermark With Text:
 # DEAFULTS
 
 INPUT = "picture.jpg"
-OUTPUT='watermarkAddedwithOS.jpg'
-logo='download.jpg'
-position='tl'
+OUTPUT='result.jpg'
+LOGO='download.jpg'
+POSITION='tl'
 DISPLAY = False
 TEXT = ""                               # Let it be empty unless you want text and watermark both
 FONT = "fonts/Helvetica.ttf"
