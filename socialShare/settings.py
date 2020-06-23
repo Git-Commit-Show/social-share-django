@@ -25,7 +25,7 @@ SECRET_KEY = 'dv#trzf#rl!^uk=iqi*!s6#lh_-t$yln9)5_43d+6($#1!pp*a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['gcsimage.herokuapp.com']
+ALLOWED_HOSTS = ['gcsimage.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -120,8 +120,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "media/images/Output"),
+    os.path.join(BASE_DIR, "media/images/output"),
 ]
-STATIC_URL = '/media/images/Output/'
+STATIC_URL = '/media/images/output/'
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media') 
 MEDIA_URL = '/media/'
