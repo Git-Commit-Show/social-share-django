@@ -6,7 +6,7 @@ from media.images import image
 import os
 
 INPUT = "Common_Event_Poster_Verticle_Withlogo.png"
-OUTPUT = "output/result.png"
+OUTPUT = "static/result.png"
 POSITION='bcl'
 DISPLAY = False
 TEXT = ""                               # Let it be empty unless you want text and watermark both
@@ -25,8 +25,9 @@ def upload(request):
 			initial_obj = form.save(commit=False)
 			initial_obj.save()
 			logoPath=initial_obj.logo.name
-			imdt=logoPath.split('/')
+			imdt=logoPath.split('/',1)
 			logo=imdt[1]
+			print(logo)
 			print(os.getcwd())
 			try:
 			    print(os.getcwd())
@@ -43,6 +44,7 @@ def upload(request):
 
 
 def viewAll(request):
-	list=os.listdir('media/images/output')
+	print(os.getcwd())
+	list=os.listdir('static/')
 	return render(request,'view.html',{'list':list})
 

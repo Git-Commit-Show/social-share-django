@@ -4,7 +4,7 @@ import os
 # DEAFULTS
 
 INPUT = "Common_Event_Poster_Verticle_Withlogo.png"
-OUTPUT = "output/result.png"
+OUTPUT = "static/result.png"
 POSITION='bcl'
 DISPLAY = False
 TEXT = ""                               # Let it be empty unless you want text and watermark both
@@ -66,6 +66,9 @@ def watermark(
     drawing.text(position_text, text, fill=color,font=font)
     if DISPLAY:
         transparent.show()
+    print('Saving to ',output_image_path)
+    os.chdir('../../')
+    print(os.getcwd())
     transparent.save(output_image_path)
 
 
@@ -112,5 +115,5 @@ def watermark_a_folder(folder_path):
     for i in logo_list:
         OUTPUT=OUTPUT+'result'+'_'+i
         watermark(INPUT,OUTPUT,folder_path+i,POSITION)
-        OUTPUT = "output/"
+        OUTPUT = "static/"
     
