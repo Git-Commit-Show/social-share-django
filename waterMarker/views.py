@@ -27,8 +27,10 @@ def upload(request):
 			logoPath=initial_obj.logo.name
 			imdt=logoPath.split('/',1)
 			logo=imdt[1]
+                        imdt1=imdt[1].split('/')
 			print(logo)
 			print(os.getcwd())
+                        OUTPUT='static/result_'+imdt1[1]
 			try:
 			    print(os.getcwd())
 			    os.chdir('media/images')
