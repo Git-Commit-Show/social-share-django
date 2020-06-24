@@ -41,5 +41,7 @@ def upload(request):
 def viewAll(request):
     print(os.getcwd())
     list=os.listdir('static/text')
+    for _ in range(len(list)):
+        list[_] = "text/" + list[_]
     return render(request,'view.html',{'list':list})
 
