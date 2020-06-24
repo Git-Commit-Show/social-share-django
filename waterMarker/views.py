@@ -43,7 +43,7 @@ def upload(request):
 
 
 def viewAll(request):
-    media_path = os.path.join(os.getcwd(), "output")
+    media_path = os.path.join(os.getcwd(), 'output')
     print("Media path : " + str(media_path))
     os.chdir(media_path)
     print(os.getcwd())
