@@ -5,5 +5,6 @@ urlpatterns = [
     path('sharePage', views.sharePage,name='sharePage'),
     path('instructions', views.Instructions,name='Instructions'),
     path('watermark/', include('waterMarker.urls')),
+    path('text/', include('text.urls')),
 
 ]

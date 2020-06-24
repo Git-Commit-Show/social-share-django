@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('sharesite.urls')),
     path('watermark/', include('waterMarker.urls')),
+    path('text/', include('text.urls')),
 ]
 
 if settings.DEBUG:

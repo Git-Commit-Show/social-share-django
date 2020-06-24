@@ -107,6 +107,9 @@ def watermark_with_text(input_image_path,
     drawing.text(mapper_position[text_position], text,fill=color, font=font) 
     if DISPLAY:
         base_image.show()
+    print('Saving to ',output_image_path)
+    os.chdir('../../')
+    print(os.getcwd())
     base_image.save(output_image_path)
 
 def watermark_a_folder(folder_path):
