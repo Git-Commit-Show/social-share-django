@@ -12,7 +12,7 @@ DISPLAY = False
 TEXT = ""                               # Let it be empty unless you want text and watermark both
 FONT = "fonts/Helvetica.ttf"
 COLOR = "white"
-TEXT_SIZE = 40
+TEXT_SIZE = 100
 TEXT_POSITION = "bc"
 TEXT_ALIGN_WATERMARK = "r"
 # Create your views here.
