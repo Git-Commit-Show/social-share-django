@@ -26,7 +26,8 @@ def upload(request):
             initial_obj.save()
             # TODO
             # Create unique output file names
-            # OUTPUT='static/result_'+request.POST['text']
+            name=request.POST['text']
+            OUTPUT='static/text/result_'+name[0:2]+'.png'
             try:
                 os.chdir('media/images')
                 image.watermark_with_text(INPUT, OUTPUT, request.POST['text'], request.POST['position'])
@@ -40,7 +41,7 @@ def upload(request):
 
 def viewAll(request):
     print(os.getcwd())
-    list=os.listdir('static/text')
+    list=os.listdir('static/text/')
     for _ in range(len(list)):
         list[_] = "text/" + list[_]
     return render(request,'view.html',{'list':list})

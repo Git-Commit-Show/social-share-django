@@ -11,6 +11,7 @@ TEXT = ""                               # Let it be empty unless you want text a
 FONT = "fonts/Helvetica.ttf"
 COLOR = "white"
 TEXT_SIZE = 40
+HEIGHT_ANCHOR=2170
 TEXT_POSITION = "bc"
 TEXT_ALIGN_WATERMARK = "r"              # Text Position wrt Watermark
 
@@ -21,6 +22,7 @@ def watermark(
               watermark_image_path,
               position_logo,
               text=TEXT,
+              height=HEIGHT_ANCHOR,
               color=COLOR,
               text_size=TEXT_SIZE,
               text_position=TEXT_ALIGN_WATERMARK
@@ -46,9 +48,9 @@ def watermark(
             'cr':(width_base-width_water-bias_width,height_base//2-height_water),
             'c':(width_base//2-width_water//2,height_base//2-height_water),
             'bl':(bias_width,height_base-height_water-bias_height), #
-            'bc':(width_base//2-width_water//2,height_base-height_water-bias_height),
-            'bcl':(int(width_base/2.2)-width_water//2,height_base-height_water-bias_height),
-            'br':(width_base-width_water-bias_width,height_base-height_water-bias_height)}
+            'bc':(width_base//2-width_water//2,height-height_water//2),
+            'bcl':(int(width_base/2.2)-width_water//2,height-height_water//2),
+            'br':(width_base-width_water-bias_width,height-height_water//2)}
 
     transparent.paste(watermark, mapper_logo_position[position_logo], mask=watermark)
     drawing = ImageDraw.Draw(transparent)
@@ -76,6 +78,7 @@ def watermark_with_text(input_image_path,
                         output_image_path,
                         text=TEXT,
                         text_position=TEXT_POSITION,
+                        height=HEIGHT_ANCHOR,
                         color=COLOR,
                         text_size=TEXT_SIZE,
                        ):
@@ -90,7 +93,6 @@ def watermark_with_text(input_image_path,
         bias_height=50
     if bias_width>50:
         bias_width=50
-
     font = ImageFont.truetype(FONT, text_size)
     textwidth, textheight = drawing.textsize(text, font)
     mapper_position={'tl':(bias_width,bias_height),
@@ -99,15 +101,16 @@ def watermark_with_text(input_image_path,
             'cl':(bias_width,height_base//2-textheight),
             'cr':(width_base-textwidth-bias_width,height_base//2-textheight),
             'c':(width_base//2-textwidth//2,height_base//2-textheight),
-            'bl':(bias_width,height_base-textheight-bias_height),
-            'bc':(width_base//2-textwidth//2,height_base-textheight-bias_height),
-            'br':(width_base-textwidth-bias_width,height_base-textheight-bias_height)}
+            'bl':(bias_width,height-textheight//2),
+            'bc':(width_base//2-textwidth//2,height-textheight//2),
+            'br':(width_base-textwidth-bias_width,height-textheight//2)}
 
 
     drawing.text(mapper_position[text_position], text,fill=color, font=font) 
     if DISPLAY:
         base_image.show()
-    print('Saving to ',output_image_path)
+    print('Saving to ',output_image_path, "for text watermark")
+
     os.chdir('../../')
     print(os.getcwd())
     base_image.save(output_image_path)
