@@ -10,7 +10,8 @@ DISPLAY = False
 TEXT = ""                               # Let it be empty unless you want text and watermark both
 FONT = "fonts/Helvetica.ttf"
 COLOR = "white"
-TEXT_SIZE_LOGO=50
+TEXT_SIZE_LOGO=35
+N=2
 TEXT_SIZE = 80
 HEIGHT_ANCHOR=2170
 WIDTH_BOUND_L=545
@@ -30,7 +31,8 @@ def watermark(
               text_size=TEXT_SIZE_LOGO,
               text_position=TEXT_ALIGN_WATERMARK
               ):
-
+    if(N<len(text.split(' '))):
+        text_position='b'
     base_image = Image.open(input_image_path)
     watermark = Image.open(watermark_image_path).convert('RGBA')
     SIZE = 300,150
@@ -58,9 +60,23 @@ def watermark(
     transparent.paste(watermark, mapper_logo_position[position_logo], mask=watermark)
     drawing = ImageDraw.Draw(transparent)
     #drawing = Image.new('RGB',transparent.size,(255,255,255,255))
-
+    text_bound_l=mapper_logo_position[position_logo][0]+width_water
     font = ImageFont.truetype(FONT, text_size)
     textwidth, textheight = drawing.textsize(text, font)
+    if(text_position=='r'):
+        print("Yeah am IN")
+        if(textwidth>(WIDTH_BOUND_R-text_bound_l)):
+            for i in range(45,25,-5):
+                font = ImageFont.truetype(FONT, i)
+                textwidth, textheight = drawing.textsize(text, font)
+                if(textwidth<(WIDTH_BOUND_R-text_bound_l)):
+                    print("NEw font to fit it was ", i)
+                    break
+                if(textwidth>(WIDTH_BOUND_R-text_bound_l) and i==30):
+                    text_position='b'
+                    print('Had to shift it down')
+                    break
+
     mapper_text_position={
         'r':(mapper_logo_position[position_logo][0]+width_water+bias_width//2,mapper_logo_position[position_logo][1]+height_water//2-textheight//2),
         'b':[mapper_logo_position[position_logo][0]+width_water//2-textwidth//2,mapper_logo_position[position_logo][1]+height_water+bias_width//2]
