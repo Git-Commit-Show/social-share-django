@@ -10,8 +10,11 @@ DISPLAY = False
 TEXT = ""                               # Let it be empty unless you want text and watermark both
 FONT = "fonts/Helvetica.ttf"
 COLOR = "white"
+TEXT_SIZE_LOGO=50
 TEXT_SIZE = 80
 HEIGHT_ANCHOR=2170
+WIDTH_BOUND_L=545
+WIDTH_BOUND_R=1105
 TEXT_POSITION = "bc"
 TEXT_ALIGN_WATERMARK = "r"              # Text Position wrt Watermark
 
@@ -24,7 +27,7 @@ def watermark(
               text=TEXT,
               height=HEIGHT_ANCHOR,
               color=COLOR,
-              text_size=TEXT_SIZE,
+              text_size=TEXT_SIZE_LOGO,
               text_position=TEXT_ALIGN_WATERMARK
               ):
 
@@ -95,15 +98,23 @@ def watermark_with_text(input_image_path,
         bias_width=50
     font = ImageFont.truetype(FONT, text_size)
     textwidth, textheight = drawing.textsize(text, font)
+    print(textwidth)
+    if(textwidth>(WIDTH_BOUND_R-WIDTH_BOUND_L)):
+        for i in range(70,2,-5):
+            font = ImageFont.truetype(FONT, i)
+            textwidth, textheight = drawing.textsize(text, font)
+            if(textwidth<(WIDTH_BOUND_R-WIDTH_BOUND_L)):
+                print("NEw font to fit it was ", i)
+                break
     mapper_position={'tl':(bias_width,bias_height),
             'tc':(width_base//2-textwidth//2,bias_height),
             'tr':(width_base-textwidth-bias_width,bias_height),
             'cl':(bias_width,height_base//2-textheight),
             'cr':(width_base-textwidth-bias_width,height_base//2-textheight),
             'c':(width_base//2-textwidth//2,height_base//2-textheight),
-            'bl':(bias_width,height-textheight//2),
+            'bl':(bias_width,height-textheight//2+70),
             'bc':(width_base//2-textwidth//2,height-textheight//2),
-            'br':(width_base-textwidth-bias_width,height-textheight//2)}
+            'br':(width_base-textwidth-bias_width,height-textheight//2+70)}
 
 
     drawing.text(mapper_position[text_position], text,fill=color, font=font) 
